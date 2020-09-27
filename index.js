@@ -1,7 +1,7 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-require("dotenv").config();
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
 
 // set up express
 const app = express();
@@ -18,13 +18,14 @@ mongoose.connect(
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true
+    useCreateIndex: true,
   },
   (err) => {
     if (err) throw err;
-    console.log("MongoDB Connection Established");
+    console.log('MongoDB Connection Established');
   }
 );
 
 // set up routes
-app.use("/users", require("./routes/userRouter"));
+app.use('/users', require('./routes/userRouter'));
+app.use('/todos', require('./routes/todoRouter'));

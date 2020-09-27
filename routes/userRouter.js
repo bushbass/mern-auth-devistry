@@ -10,9 +10,7 @@ router.post('/register', async (req, res) => {
 
     //validation
     if (!email || !password || !passwordCheck)
-      return res
-        .status(400)
-        .json({ msg: 'the password must be 5 characters long' });
+      return res.status(400).json({ msg: 'Not all fields have been entered' });
 
     if (password !== passwordCheck)
       return res.status(400).json({ msg: 'Passwords do not match' });
@@ -49,7 +47,7 @@ router.post('/login', async (req, res) => {
     if (!user)
       return res
         .status(400)
-        .json({ msg: 'no account with this email regiestserd' });
+        .json({ msg: 'no account with this email registered' });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ msg: 'invalid credentials' });
