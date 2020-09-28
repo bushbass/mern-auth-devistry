@@ -20,9 +20,16 @@ router.post('/', auth, async (req, res) => {
   }
 });
 
+// get all todos from logged in user
 router.get('/', auth, async (req, res) => {
   const todos = await Todo.find({ userId: req.user });
   res.json(todos);
+});
+
+// get specific todo from logged in user
+router.get('/:id', auth, async (req, res) => {
+  const todo = await Todo.find({ userId: req.user, _id: req.params.id });
+  res.json(todo);
 });
 
 router.delete('/:id', auth, async (req, res) => {
