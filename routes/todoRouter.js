@@ -33,6 +33,7 @@ router.get('/:id', auth, async (req, res) => {
 });
 
 router.delete('/:id', auth, async (req, res) => {
+  console.log({ params: req.params });
   const todo = await Todo.findOne({ userId: req.user, _id: req.params.id });
   if (!todo)
     return res
@@ -40,6 +41,7 @@ router.delete('/:id', auth, async (req, res) => {
       .json({ msg: 'no todo found with id that belongs to current user' });
 
   const deletedTodo = await Todo.findByIdAndDelete(req.params.id);
+  console.log({ deletedTodo });
   res.json(deletedTodo);
 });
 
